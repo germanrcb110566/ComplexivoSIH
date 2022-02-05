@@ -6831,4 +6831,16 @@ button.close {
     display: none !important;
   }
 }
+#caja {
+    height: 15px;
+}
+
+#texto-left {
+    float: left;
+}
+
+#texto-rigth {
+    float: right;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
