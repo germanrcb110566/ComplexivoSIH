@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ComplexivoSIH.Models.mParametros>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo Registro", "Create", new { }, new { @class = "btn btn-info" }) |
+    <input onclick="jsInactivo(1);" type="button" value="Ver Todos los Registros" class="btn btn-info" /> |
+    <input onclick="jsSoloInactivo(2);" type="button" value="Ver Solo Inactivos" class="btn btn-info" /> |
+    <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.smtpserver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.smtppuerto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correo_sistema)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.clave_correo)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.smtpserver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.smtppuerto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo_sistema)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.clave_correo)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.parametro_id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.parametro_id }, new { @class = "btn btn-info" }) |
+                <input onclick="jsDelete(@item.parametro_id);" type="button" value="Eliminar" class="btn btn-danger" />
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    function jsDelete(id) {
+        if (confirm("Estas Seguro de eliminar?")) {
+            url = "@Url.Content("~/Parametros/Borrar")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Parametros/Index")"
+                } else {
+                    alert("Ocurrio un Error");
+                }
+            })
+        }
+    }
+    function jsVerRegistros(id) {
+
+        url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Parametros/Index/1")"
+                }
+            })
+
+    }
+    function jsInactivo(id) {
+
+        url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Parametros/Index/1")"
+                }
+            })
+
+    }
+        function jsSoloInactivo(id) {
+
+            url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "2") {
+                    document.location.href = "@Url.Content("~/Parametros/Index/2")"
+                }
+            })
+
+    }
+</script>
+<script>
+        function jsActivos(id) {
+            url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "3") {
+                    document.location.href = "@Url.Content("~/Parametros/Index")"
+                }
+            })
+    }
+</script>
