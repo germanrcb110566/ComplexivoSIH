@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 
 <body style="background: -webkit-linear-gradient(90deg, lightgray 50%, lightstellblue 75%)">
@@ -31,6 +32,7 @@
     </nav>
     <main class="row" style="margin: 2% 2% 2% 2%; background-color:beige; width:96%">
         <div class="container">
+
             @RenderBody()
         </div>
     </main>
@@ -46,7 +48,12 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-
 </body>
 
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Tablas').DataTable();
+    });
+</script>
+

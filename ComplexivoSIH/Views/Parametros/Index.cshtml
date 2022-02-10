@@ -14,26 +14,27 @@
     <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />
 
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.smtpserver)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.smtppuerto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo_sistema)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.clave_correo)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
-
+<table id="Tablas" class="table table-striped table-bordered" style="width:80%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.smtpserver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.smtppuerto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correo_sistema)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.clave_correo)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -61,6 +62,8 @@
     }
 
 </table>
+
+
 <script>
     function jsDelete(id) {
         if (confirm("Estas Seguro de eliminar?")) {
@@ -75,7 +78,6 @@
         }
     }
     function jsVerRegistros(id) {
-
         url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
             $.post(url, function (data){
                 if (data == "1") {
@@ -85,7 +87,6 @@
 
     }
     function jsInactivo(id) {
-
         url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
             $.post(url, function (data){
                 if (data == "1") {
@@ -95,7 +96,6 @@
 
     }
         function jsSoloInactivo(id) {
-
             url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
             $.post(url, function (data){
                 if (data == "2") {
@@ -104,8 +104,6 @@
             })
 
     }
-</script>
-<script>
         function jsActivos(id) {
             url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
             $.post(url, function (data){
@@ -115,3 +113,4 @@
             })
     }
 </script>
+
