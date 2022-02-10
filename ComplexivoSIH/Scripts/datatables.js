@@ -11817,8 +11817,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
-		},
+			"sZeroRecords": "No Hay Registros con Coincidencia"
+		}, 
 	
 	
 		/**
