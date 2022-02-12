@@ -78,8 +78,11 @@ namespace ComplexivoSIH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "parametro_id,smtpserver,smtppuerto,correo_sistema,clave_correo,estado")] mParametros mParametros)
         {
+
+            
             if (ModelState.IsValid)
             {
+                mParametros.clave_correo = FuncionesController.EncryptKey(mParametros.clave_correo);
                 mParametros.estado = true;
                 db.mParametros.Add(mParametros);
                 db.SaveChanges();
@@ -121,6 +124,10 @@ namespace ComplexivoSIH.Controllers
                 if (mParametros.clave_correo == null)
                 {
                     mParametros.clave_correo = oParametros.clave_correo;
+                }
+                else
+                {
+                    mParametros.clave_correo = FuncionesController.EncryptKey(mParametros.clave_correo);
                 }
             }
 
