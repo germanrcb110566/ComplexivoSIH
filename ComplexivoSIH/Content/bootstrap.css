@@ -4047,6 +4047,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 2;
   margin-left: -1px;
 }
+
 .nav {
   padding-left: 0;
   margin-bottom: 0;
@@ -6842,5 +6843,7 @@ button.close {
 #texto-rigth {
     float: right;
 }
+
+
 
 /*# sourceMappingURL=bootstrap.css.map */

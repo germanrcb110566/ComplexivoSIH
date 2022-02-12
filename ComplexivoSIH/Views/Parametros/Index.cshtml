@@ -81,15 +81,6 @@
             })
         }
     }
-    function jsVerRegistros(id) {
-        url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
-            $.post(url, function (data){
-                if (data == "1") {
-                    document.location.href = "@Url.Content("~/Parametros/Index/1")"
-                }
-            })
-
-    }
     function jsInactivo(id) {
         url = "@Url.Content("~/Parametros/Inactivos")" + "/" + id;
             $.post(url, function (data){
