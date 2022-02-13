@@ -17,7 +17,7 @@ namespace ComplexivoSIH.Controllers
         // GET: Parametros
         public ActionResult Index(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Visualizar Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -46,7 +46,7 @@ namespace ComplexivoSIH.Controllers
         [HttpGet]
         public ActionResult Inactivos()
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Visualizar Parametros Inactivos del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -55,7 +55,7 @@ namespace ComplexivoSIH.Controllers
         [HttpPost]
         public ActionResult Inactivos(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             return Content(id.ToString());
@@ -64,7 +64,7 @@ namespace ComplexivoSIH.Controllers
         // GET: Parametros/Details/5
         public ActionResult Details(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Visualizar Detalles de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -83,7 +83,7 @@ namespace ComplexivoSIH.Controllers
         // GET: Parametros/Create
         public ActionResult Create()
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Creación de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -97,7 +97,7 @@ namespace ComplexivoSIH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "parametro_id,smtpserver,smtppuerto,correo_sistema,clave_correo,estado")] mParametros mParametros)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
 
@@ -117,7 +117,7 @@ namespace ComplexivoSIH.Controllers
         // GET: Parametros/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Edición de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -140,7 +140,7 @@ namespace ComplexivoSIH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "parametro_id,smtpserver,smtppuerto,correo_sistema,clave_correo,estado")] mParametros mParametros)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (!ModelState.IsValid)
@@ -170,7 +170,7 @@ namespace ComplexivoSIH.Controllers
         // GET: Parametros/Delete/5
         public ActionResult Delete(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Eliminación de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -191,7 +191,7 @@ namespace ComplexivoSIH.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Eliminación de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
@@ -212,7 +212,7 @@ namespace ComplexivoSIH.Controllers
         [HttpPost]
         public ActionResult Borrar(int? id)
         {
-            ViewBag.alerta = "success";
+            ViewBag.alerta = "info";
             ViewBag.msgmodulo = "Eliminación de Parametros del Sistema".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
