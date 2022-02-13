@@ -1,0 +1,90 @@
+﻿@model List<ComplexivoSIH.Models.mPersona>
+@{
+    ViewBag.Title = "Sistema Hospitalario En Línea";
+    Layout = ViewBag.layout;
+}
+<div id="caja">
+    <div id="texto-left" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta">- - <b>@ViewBag.msgmodulo</b> - -</div>
+    <div id="texto-rigth" style="color: black; height:50px" class="alert alert-info">@ViewBag.acceso</div>
+</div>
+<br />
+<br />
+<br />
+
+
+<form id="FrmIngreso" action="/Acceso/Index" method="post">
+    <table>
+        <tr>
+            <td style="padding: 2px">Identificación:</td>
+            <td style="padding: 2px">
+                <input class="form-control " type="text" maxlength="13" size=100 style="width:300px" name="identificacion" minlength="6" maxlenght="13" id="identificacion" onkeypress="return event.charCode > 47 && event.charCode < 58;" required />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 2px">Clave:</td>
+            <td style="padding: 2px">
+                <input class="form-control" type="password" size=100 style="width:500px" name="password" minlength="6" maxlenght="30" id="password" required />
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 2px"></td>
+            <td style="padding: 2px">
+                <button class="btn btn-success" type="submit" name="btngrabar" id="btngrabar">
+                    <span class="glyphicon glyphicon-save">Ingresar</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<br />
+<br />
+
+<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+    $("#FrmIngreso").submit(function (e) {
+        e.preventDefault()
+        //Se ejecuta el Controlador Acceso / Persona
+        url = "@Url.Content("~/Acceso/Index")"
+        parametros = $(this).serialize()
+        $.post(url, parametros, function (data) {
+            @*if (data == "PACIENTE") {
+                document.location.href = "@Url.Content("~/Home/IndexPaciente")"
+            } else {
+                if (data == "ADMINISTRADOR") {
+                    document.location.href = "@Url.Content("~/Home/IndexAdmin")"
+                } else {
+                    if (data == "SECRETARIA") {
+                        document.location.href = "@Url.Content("~/Home/IndexGestion")"
+                    } else {
+                        if (data == "MEDICO") {
+                            document.location.href = "@Url.Content("~/Home/IndexMedico")"
+                        } else {
+                            if (data == "SERVICIOS GENERALES") {
+                                document.location.href = "@Url.Content("~/Home/IndexGestion")"
+                            } else {
+                                if (data == "AUXILIAR") {
+                                    document.location.href = "@Url.Content("~/Home/IndexGestion")"
+                                } else {
+                                    if (data == "ALTA GERENCIA") {
+                                        document.location.href = "@Url.Content("~/Home/IndexGestion")"
+                                    } else {*@
+                                        document.location.href = "@Url.Content("~/Home/Index")"
+
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            })
+        })
+    })
+    </script>
+
+}

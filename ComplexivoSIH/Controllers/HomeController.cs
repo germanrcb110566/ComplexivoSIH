@@ -10,6 +10,11 @@ namespace ComplexivoSIH.Controllers
     {
         public ActionResult Index()
         {
+
+            ViewBag.alerta = "info";
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+            
             return View();
         }
 

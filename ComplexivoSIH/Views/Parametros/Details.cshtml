@@ -1,18 +1,23 @@
 ﻿@model ComplexivoSIH.Models.mParametros
-
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Sistema Hospitalario En Línea";
+    Layout = ViewBag.layout;
 }
 
-<h2>Details</h2>
+<div id="caja">
+    <div id="texto-left" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta">- - <b>@ViewBag.msgmodulo</b> - -</div>
+    <div id="texto-rigth" style="color: black; height:50px" class="alert">@ViewBag.acceso</div>
+</div>
+<br />
+<br />
+<br />
 
 <div>
     <h4>mParametros</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-        @Html.DisplayNameFor(model => model.smtpserver)
+            @Html.DisplayNameFor(model => model.smtpserver)
         </dt>
 
         <dd>
@@ -20,7 +25,7 @@
         </dd>
 
         <dt>
-        @Html.DisplayNameFor(model => model.smtppuerto)
+            @Html.DisplayNameFor(model => model.smtppuerto)
         </dt>
 
         <dd>
@@ -28,7 +33,7 @@
         </dd>
 
         <dt>
-        @Html.DisplayNameFor(model => model.correo_sistema)
+            @Html.DisplayNameFor(model => model.correo_sistema)
         </dt>
 
         <dd>
@@ -36,20 +41,20 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.clave_correo)
-        </dt>
+                @Html.DisplayNameFor(model => model.clave_correo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.clave_correo)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.clave_correo)
+            </dd>*@
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.estado)
+            </dd>*@
 
     </dl>
 </div>
@@ -57,3 +62,8 @@
     @Html.ActionLink("Editar", "Edit", new { id = Model.parametro_id }, new { @class = "btn btn-info" }) |
     @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-info" })
 </p>
+<br />
+<br />
+<br />
+
+<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
