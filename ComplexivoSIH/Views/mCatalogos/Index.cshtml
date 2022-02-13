@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ComplexivoSIH.Models.mCatalogo>
+@{
+    ViewBag.Title = "Sistema Hospitalario En Línea";
+    Layout = ViewBag.layout;
+}
+
+<div id="caja">
+    <div id="texto-left" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta">- - <b>@ViewBag.msgmodulo</b> - -</div>
+    <div id="texto-rigth" style="color: black; height:50px" class="alert alert-@ViewBag.alerta">@ViewBag.acceso</div>
+</div>
+<br />
+<br />
+<br />
+
+
+
+<p>
+    @Html.ActionLink("Crear Nuevo Registro", "Create", new { }, new { @class = "btn btn-info" }) |
+    <input onclick="jsInactivo(1);" type="button" value="Ver Todos los Registros" class="btn btn-info" /> |
+    <input onclick="jsSoloInactivo(2);" type="button" value="Ver Solo Inactivos" class="btn btn-info" /> |
+    <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.catalogo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.catalogo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.mcatalogo_id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.mcatalogo_id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.mcatalogo_id }, new { @class = "btn btn-danger" } )
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+<br />
+
+<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
+<script>
+    function jsInactivo(id) {
+        url = "@Url.Content("~/mCatalogos/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/mCatalogos/Index/1")"
+                }
+            })
+
+    }
+        function jsSoloInactivo(id) {
+            url = "@Url.Content("~/mCatalogos/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "2") {
+                    document.location.href = "@Url.Content("~/mCatalogos/Index/2")"
+                }
+            })
+
+    }
+        function jsActivos(id) {
+            url = "@Url.Content("~/mCatalogos/Inactivos")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "3") {
+                    document.location.href = "@Url.Content("~/mCatalogos/Index")"
+                }
+            })
+    }
+</script>

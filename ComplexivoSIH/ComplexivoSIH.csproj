@@ -142,6 +142,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\FuncionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\mCatalogosController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Filtros\ClsSesiones.cs" />
     <Compile Include="Global.asax.cs">
@@ -508,6 +509,11 @@
     <Content Include="Views\Shared\_Layout_Paciente.cshtml" />
     <Content Include="Views\Shared\_Layout_Gerente.cshtml" />
     <Content Include="Views\Shared\_Layout_Medico.cshtml" />
+    <Content Include="Views\mCatalogos\Create.cshtml" />
+    <Content Include="Views\mCatalogos\Delete.cshtml" />
+    <Content Include="Views\mCatalogos\Details.cshtml" />
+    <Content Include="Views\mCatalogos\Edit.cshtml" />
+    <Content Include="Views\mCatalogos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,47 @@
+﻿@model ComplexivoSIH.Models.mCatalogo
+
+@{
+    ViewBag.Title = "Sistema Hospitalario En Línea";
+    Layout = ViewBag.layout;
+}
+
+<div id="caja">
+    <div id="texto-left" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta">- - <b>@ViewBag.msgmodulo</b> - -</div>
+    <div id="texto-rigth" style="color: black; height:50px" class="alert alert-@ViewBag.alerta">@ViewBag.acceso</div>
+</div>
+<br />
+<br />
+<br />
+
+
+<div>
+    <h4>mCatalogo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.catalogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catalogo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.mcatalogo_id }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
+</p>
+<br />
+<br />
+<br />
+
+<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
