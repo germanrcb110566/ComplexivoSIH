@@ -143,6 +143,7 @@
     <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\FuncionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\mCalendariosController.cs" />
     <Compile Include="Controllers\mCatalogosController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Filtros\ClsSesiones.cs" />
@@ -526,6 +527,11 @@
     <Content Include="Views\Catalogos\Index.cshtml" />
     <Content Include="Views\mCatalogos\EditCatalogo.cshtml" />
     <Content Include="Views\mCatalogos\CreateCatalogo.cshtml" />
+    <Content Include="Views\mCalendarios\Create.cshtml" />
+    <Content Include="Views\mCalendarios\Delete.cshtml" />
+    <Content Include="Views\mCalendarios\Details.cshtml" />
+    <Content Include="Views\mCalendarios\Edit.cshtml" />
+    <Content Include="Views\mCalendarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
