@@ -14,38 +14,43 @@
 <br />
 <p>
     @Html.ActionLink("Crear Nuevo Registro", "Create", new { }, new { @class = "btn btn-info" }) |
-    <input onclick="jsInactivo(1);" type="button" value="Ver Todos los Registros" class="btn btn-info" /> |
+    @*<input onclick="jsInactivo(1);" type="button" value="Ver Todos los Registros" class="btn btn-info" /> |
     <input onclick="jsSoloInactivo(2);" type="button" value="Ver Solo Inactivos" class="btn btn-info" /> |
-    <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />
+    <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />*@
 </p>
 <table id="Tablas" class="table table-striped table-bordered" style="width:80%">
     <thead>
 
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Catalogo.nombre)
+                Rol Asignado
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.mPersona.identificacion)
+                Persona
             </th>
             <th></th>
         </tr>
         </thead>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Catalogo.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.mPersona.identificacion)
-                </td>
-                <td>
-                    @*@Html.ActionLink("Editar", "Edit", new { id = item.registro_id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.registro_id }, new { @class = "btn btn-info" }) |*@
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.registro_id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Catalogo.nombre)
+    </td>
+    <td>
+        @Html.HiddenFor(modelItem => item.mPersona.identificacion)
+        @Html.DisplayFor(modelItem => item.mPersona.apellidos)
+    </td>
+    <td>
+       
+        @Html.DisplayFor(modelItem => item.mPersona.nombres)
+    </td>
+    <td>
+        @*@Html.ActionLink("Editar", "Edit", new { id = item.registro_id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.registro_id }, new { @class = "btn btn-info" }) |*@
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.registro_id }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
         }
 
 </table>

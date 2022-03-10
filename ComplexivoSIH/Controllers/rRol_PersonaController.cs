@@ -19,7 +19,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Index()
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Visualizar Asignación de Roles a Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             var rRol_Persona = db.rRol_Persona.Where(r =>r.rol_id != 10).Include(r => r.Catalogo).Include(r => r.mPersona);
@@ -31,7 +31,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Details(int? id)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Visualizar Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (id == null)
@@ -50,10 +50,10 @@ namespace ComplexivoSIH.Controllers
         public ActionResult Create()
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Crear Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
-            ViewBag.rol_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            ViewBag.rol_id = new SelectList(db.Catalogo.Where(r =>r.mcatalogo_id == 4), "catalogo_id", "nombre");
             ViewBag.persona_id = new SelectList(db.mPersona, "persona_id", "identificacion");
             return View();
         }
@@ -66,7 +66,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Create([Bind(Include = "registro_id,persona_id,rol_id")] rRol_Persona rRol_Persona)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Crear Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Editar Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (id == null)
@@ -110,7 +110,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Edit([Bind(Include = "registro_id,persona_id,rol_id")] rRol_Persona rRol_Persona)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Editar Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> Delete(int? id)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Eliminar Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             if (id == null)
@@ -149,7 +149,7 @@ namespace ComplexivoSIH.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             ViewBag.alerta = "info";
-            ViewBag.msgmodulo = "Visualizar Roles de Personas".ToUpper();
+            ViewBag.msgmodulo = "Eliminar Asignación Roles de Personas".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             rRol_Persona rRol_Persona = await db.rRol_Persona.FindAsync(id);

@@ -90,9 +90,13 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Opción de Permisos".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
-            ViewBag.rol_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
-            ViewBag.modulo_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
-            ViewBag.accion_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            //ViewBag.rol_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            //ViewBag.modulo_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            //ViewBag.accion_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            ViewBag.rol_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 4), "catalogo_id", "nombre");
+            ViewBag.modulo_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 5), "catalogo_id", "nombre");
+            ViewBag.accion_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 3), "catalogo_id", "nombre");
+
             return View();
         }
 
@@ -109,8 +113,18 @@ namespace ComplexivoSIH.Controllers
             ViewBag.layout = Session["Layout"];
             if (ModelState.IsValid)
             {
-                db.mPermisos.Add(mPermisos);
-                await db.SaveChangesAsync();
+                try
+                {
+                    db.mPermisos.Add(mPermisos);
+                    await db.SaveChangesAsync();
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.alerta = "danger";
+                    ViewBag.error = ex.Message;
+                }
+                
+                
                 return RedirectToAction("Index");
             }
 
@@ -136,9 +150,9 @@ namespace ComplexivoSIH.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.rol_id = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPermisos.rol_id);
-            ViewBag.modulo_id = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPermisos.modulo_id);
-            ViewBag.accion_id = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPermisos.accion_id);
+            ViewBag.rol_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id==4), "catalogo_id", "nombre", mPermisos.rol_id);
+            ViewBag.modulo_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 5), "catalogo_id", "nombre", mPermisos.modulo_id);
+            ViewBag.accion_id = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 3), "catalogo_id", "nombre", mPermisos.accion_id);
             return View(mPermisos);
         }
 
@@ -194,8 +208,12 @@ namespace ComplexivoSIH.Controllers
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
             mPermisos mPermisos = await db.mPermisos.FindAsync(id);
-            db.mPermisos.Remove(mPermisos);
+            mPermisos.estado = false;
+            db.Entry(mPermisos).State = EntityState.Modified;
             await db.SaveChangesAsync();
+
+            //db.mPermisos.Remove(mPermisos);
+            //await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
