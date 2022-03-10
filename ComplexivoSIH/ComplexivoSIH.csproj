@@ -140,6 +140,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\FuncionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\mCatalogosController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CatalogoHelper.cs" />
     <Compile Include="Models\Catalogo.cs">
       <DependentUpon>ModelSIH.tt</DependentUpon>
     </Compile>
@@ -514,10 +516,14 @@
     <Content Include="Views\mCatalogos\Details.cshtml" />
     <Content Include="Views\mCatalogos\Edit.cshtml" />
     <Content Include="Views\mCatalogos\Index.cshtml" />
+    <Content Include="Views\Catalogos\Create.cshtml" />
+    <Content Include="Views\Catalogos\Delete.cshtml" />
+    <Content Include="Views\Catalogos\Details.cshtml" />
+    <Content Include="Views\Catalogos\Edit.cshtml" />
+    <Content Include="Views\Catalogos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Funciones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

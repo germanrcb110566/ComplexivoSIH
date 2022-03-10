@@ -20,36 +20,37 @@
     <input onclick="jsSoloInactivo(2);" type="button" value="Ver Solo Inactivos" class="btn btn-info" /> |
     <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.catalogo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="Tablas" class="table table-striped table-bordered" style="width:80%">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.catalogo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.catalogo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
 
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.mcatalogo_id }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.mcatalogo_id }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.mcatalogo_id }, new { @class = "btn btn-danger" } )
-            </td>
+            <th></th>
         </tr>
-    }
+    </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.catalogo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
 
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.mcatalogo_id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.mcatalogo_id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.mcatalogo_id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+      
 </table>
 <br />
 <br />
