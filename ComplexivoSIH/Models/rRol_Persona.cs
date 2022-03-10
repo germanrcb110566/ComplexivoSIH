@@ -17,7 +17,8 @@ namespace ComplexivoSIH.Models
         public int registro_id { get; set; }
         public int persona_id { get; set; }
         public int rol_id { get; set; }
-    
+
+        public virtual mCatalogo mCatalogo { get; set; }
         public virtual Catalogo Catalogo { get; set; }
         public virtual mPersona mPersona { get; set; }
     }

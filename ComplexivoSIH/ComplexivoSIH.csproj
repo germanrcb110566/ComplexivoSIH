@@ -148,6 +148,7 @@
     <Compile Include="Controllers\mPermisosController.cs" />
     <Compile Include="Controllers\mPersonasController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
+    <Compile Include="Controllers\rRol_PersonaController.cs" />
     <Compile Include="Filtros\ClsSesiones.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -544,6 +545,12 @@
     <Content Include="Views\mPersonas\Details.cshtml" />
     <Content Include="Views\mPersonas\Edit.cshtml" />
     <Content Include="Views\mPersonas\Index.cshtml" />
+    <Content Include="Views\mPersonas\CreatePaciente.cshtml" />
+    <Content Include="Views\rRol_Persona\Create.cshtml" />
+    <Content Include="Views\rRol_Persona\Delete.cshtml" />
+    <Content Include="Views\rRol_Persona\Details.cshtml" />
+    <Content Include="Views\rRol_Persona\Edit.cshtml" />
+    <Content Include="Views\rRol_Persona\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

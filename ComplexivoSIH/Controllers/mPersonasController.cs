@@ -117,8 +117,79 @@ namespace ComplexivoSIH.Controllers
 
             if (ModelState.IsValid)
             {
+                mPersona.clave = FuncionesController.EncryptKey(mPersona.clave, mPersona.identificacion);
                 db.mPersona.Add(mPersona);
                 await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.identificacion_tipo = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPersona.identificacion_tipo);
+            ViewBag.genero = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPersona.genero);
+            ViewBag.ciudad_residencia = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPersona.ciudad_residencia);
+            ViewBag.nacionalidad = new SelectList(db.Catalogo, "catalogo_id", "nombre", mPersona.nacionalidad);
+            return View(mPersona);
+        }
+        public ActionResult CreatePaciente()
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Maestro de Personas".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+
+            ViewBag.identificacion_tipo = new SelectList(db.Catalogo.Where(d => d.mcatalogo_id == 1 && d.estado == true), "catalogo_id", "nombre");
+            ViewBag.genero = new SelectList(db.Catalogo.Where(d => d.mcatalogo_id == 2 && d.estado == true), "catalogo_id", "nombre");
+            ViewBag.ciudad_residencia = new SelectList(db.Catalogo.Where(d => d.mcatalogo_id == 8 && d.estado == true), "catalogo_id", "nombre");
+            ViewBag.nacionalidad = new SelectList(db.Catalogo.Where(d => d.mcatalogo_id == 9 && d.estado == true), "catalogo_id", "nombre");
+
+
+            return View();
+        }
+
+        // POST: mPersonas/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreatePaciente([Bind(Include = "persona_id,identificacion_tipo,identificacion,nombres,apellidos,direccion,telefono,celular,fecha_nacimiento,correo_electronico,genero,ciudad_residencia,nacionalidad,clave,estado")] mPersona mPersona)
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Maestro de Personas".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+
+            if (ModelState.IsValid)
+            {
+                string SentenciaSQL = null;
+                string Rol = null;
+                mPersona.clave = FuncionesController.EncryptKey(mPersona.clave, mPersona.identificacion);
+                db.mPersona.Add(mPersona);
+                await db.SaveChangesAsync();
+
+
+                SentenciaSQL = "INSERT INTO RROL_PERSONA VALUES (" + mPersona.persona_id + ",10)";
+
+                try
+                {
+                    using (var conexion = new SIHEntities())
+                    {
+
+                        Rol = conexion.Database.SqlQuery<string>(SentenciaSQL).FirstOrDefault();
+                        if (Rol != null)
+                        {
+                            Session["mensaje"] = "0000SENTENCIA EJECUTADA CORRECTAMENTE";
+                        }
+                        else
+                        {
+                            Session["mensaje"] = "0099NO TIENE ASIGNADO UN ROL LA PERSONA";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session["mensaje"] = "0020:ERROR AL GRABAR EN EL MÓDULO ROL_PERSONAS.  INFORMACION ADICIONAL:" + ex.Message;
+                }
+
+
                 return RedirectToAction("Index");
             }
 
@@ -167,6 +238,7 @@ namespace ComplexivoSIH.Controllers
 
             if (ModelState.IsValid)
             {
+                //mPersona.clave = FuncionesController.EncryptKey(mPersona.clave, mPersona.identificacion);
                 db.Entry(mPersona).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
