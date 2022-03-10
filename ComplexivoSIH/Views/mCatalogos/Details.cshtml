@@ -39,7 +39,10 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.mcatalogo_id }, new { @class = "btn btn-warning" }) |
     @Html.ActionLink("Crear Atributo", "CreateCatalogo", new { id = Model.mcatalogo_id }, new { @class = "btn btn-success" }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" }) @*|
+    <input onclick="jsInactivo(1);" type="button" value="Ver Todos los Registros" class="btn btn-info" /> |
+    <input onclick="jsSoloInactivo(2);" type="button" value="Ver Solo Inactivos" class="btn btn-info" /> |
+    <input onclick="jsActivos(3);" type="button" value="Ver Solo Activos" class="btn btn-info" />*@
 </p>
 <h4>Atributos de Catálogo</h4>
 @if (Model.Catalogo1.Count() == 0)
@@ -89,3 +92,31 @@ else
     <br />
 
     <div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
+    <script>
+    function jsInactivo(id) {
+        url = "@Url.Content("~/mCatalogos/InactivosAtr")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/mCatalogos/IndexAtr/1")"
+                }
+            })
+
+    }
+        function jsSoloInactivo(id) {
+            url = "@Url.Content("~/mCatalogos/InactivosAtr")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "2") {
+                    document.location.href = "@Url.Content("~/mCatalogos/IndexAtr/2")"
+                }
+            })
+
+    }
+        function jsActivos(id) {
+            url = "@Url.Content("~/mCatalogos/InactivosAtr")" + "/" + id;
+            $.post(url, function (data){
+                if (data == "3") {
+                    document.location.href = "@Url.Content("~/mCatalogos/IndexAtr")"
+                }
+            })
+    }
+    </script>

@@ -62,6 +62,24 @@ namespace ComplexivoSIH.Controllers
             return Content(id.ToString());
         }
 
+        [HttpGet]
+        public ActionResult InactivosAtr()
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Parametros Inactivos del Sistema".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+            return Content("1");
+        }
+        [HttpPost]
+        public ActionResult InactivosAtr(int? id)
+        {
+            ViewBag.alerta = "info";
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+            return Content(id.ToString());
+        }
+
 
 
 
