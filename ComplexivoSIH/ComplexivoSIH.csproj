@@ -153,6 +153,9 @@
     <Compile Include="Models\Catalogo.cs">
       <DependentUpon>ModelSIH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mAtencion.cs">
+      <DependentUpon>ModelSIH.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mAuditoria.cs">
       <DependentUpon>ModelSIH.tt</DependentUpon>
     </Compile>

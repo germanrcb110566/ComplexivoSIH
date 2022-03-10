@@ -14,10 +14,18 @@ namespace ComplexivoSIH.Models
     
     public partial class mCatalogo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mCatalogo()
+        {
+            this.Catalogo11 = new HashSet<Catalogo>();
+        }
+    
         public int mcatalogo_id { get; set; }
         public string catalogo { get; set; }
         public bool estado { get; set; }
     
         public virtual Catalogo Catalogo1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Catalogo> Catalogo11 { get; set; }
     }
 }

@@ -12,13 +12,14 @@ namespace ComplexivoSIH.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mParametros
+    public partial class mAtencion
     {
-        public int parametro_id { get; set; }
-        public string smtpserver { get; set; }
-        public int smtppuerto { get; set; }
-        public string correo_sistema { get; set; }
-        public string clave_correo { get; set; }
-        public bool estado { get; set; }
+        public int atencion_id { get; set; }
+        public int cita_id { get; set; }
+        public string diagnostico { get; set; }
+        public string examenes { get; set; }
+        public string receta { get; set; }
+    
+        public virtual mCita mCita { get; set; }
     }
 }

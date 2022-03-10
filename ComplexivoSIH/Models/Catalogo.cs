@@ -59,5 +59,6 @@ namespace ComplexivoSIH.Models
         public virtual ICollection<rMedico_Especialidad> rMedico_Especialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rRol_Persona> rRol_Persona { get; set; }
+        public virtual mCatalogo mCatalogo1 { get; set; }
     }
 }

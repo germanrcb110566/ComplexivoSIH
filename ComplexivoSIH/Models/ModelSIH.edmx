@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SIHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SIHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Catalogo">
           <Key>
             <PropertyRef Name="catalogo_id" />
@@ -14,6 +14,16 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="300" />
           <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mAtencion">
+          <Key>
+            <PropertyRef Name="atencion_id" />
+          </Key>
+          <Property Name="atencion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cita_id" Type="int" Nullable="false" />
+          <Property Name="diagnostico" Type="text" Nullable="false" />
+          <Property Name="examenes" Type="text" />
+          <Property Name="receta" Type="text" />
         </EntityType>
         <EntityType Name="mAuditoria">
           <Key>
@@ -61,9 +71,6 @@
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="hora" Type="datetime" Nullable="false" />
           <Property Name="motivo" Type="text" Nullable="false" />
-          <Property Name="diagnostico" Type="text" />
-          <Property Name="examenes" Type="text" />
-          <Property Name="receta" Type="text" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="mParametros">
@@ -143,13 +150,25 @@
         </EntityType>
         <Association Name="FK_Catalogo_mCatalogo">
           <End Role="mCatalogo" Type="Self.mCatalogo" Multiplicity="1" />
-          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="0..1" />
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="mCatalogo">
               <PropertyRef Name="mcatalogo_id" />
             </Principal>
             <Dependent Role="Catalogo">
-              <PropertyRef Name="catalogo_id" />
+              <PropertyRef Name="mcatalogo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAtencion_mCita1">
+          <End Role="mCita" Type="Self.mCita" Multiplicity="1" />
+          <End Role="mAtencion" Type="Self.mAtencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mCita">
+              <PropertyRef Name="cita_id" />
+            </Principal>
+            <Dependent Role="mAtencion">
+              <PropertyRef Name="cita_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -383,6 +402,7 @@
         </Association>
         <EntityContainer Name="SIHModelStoreContainer">
           <EntitySet Name="Catalogo" EntityType="Self.Catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mAtencion" EntityType="Self.mAtencion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mAuditoria" EntityType="Self.mAuditoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mCalendario" EntityType="Self.mCalendario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mCatalogo" EntityType="Self.mCatalogo" Schema="dbo" store:Type="Tables" />
@@ -397,6 +417,10 @@
           <AssociationSet Name="FK_Catalogo_mCatalogo" Association="Self.FK_Catalogo_mCatalogo">
             <End Role="mCatalogo" EntitySet="mCatalogo" />
             <End Role="Catalogo" EntitySet="Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAtencion_mCita1" Association="Self.FK_mAtencion_mCita1">
+            <End Role="mCita" EntitySet="mCita" />
+            <End Role="mAtencion" EntitySet="mAtencion" />
           </AssociationSet>
           <AssociationSet Name="FK_mAuditoria_mPersonas" Association="Self.FK_mAuditoria_mPersonas">
             <End Role="mPersona" EntitySet="mPersona" />
@@ -475,8 +499,7 @@
             <End Role="rRol_Persona" EntitySet="rRol_Persona" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SIHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -501,6 +524,7 @@
           <NavigationProperty Name="mTratamiento" Relationship="Self.FK_mTratamiento_Catalogo" FromRole="Catalogo" ToRole="mTratamiento" />
           <NavigationProperty Name="rMedico_Especialidad" Relationship="Self.FK_rMedico_Especialidad_Catalogo" FromRole="Catalogo" ToRole="rMedico_Especialidad" />
           <NavigationProperty Name="rRol_Persona" Relationship="Self.FK_rRol_Persona_Catalogo" FromRole="Catalogo" ToRole="rRol_Persona" />
+          <NavigationProperty Name="mCatalogo1" Relationship="SIHModel.FK_Catalogo_mCatalogo1" FromRole="Catalogo" ToRole="mCatalogo" />
         </EntityType>
         <EntityType Name="mAuditoria">
           <Key>
@@ -539,6 +563,7 @@
           <Property Name="catalogo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Catalogo1" Relationship="Self.FK_Catalogo_mCatalogo" FromRole="mCatalogo" ToRole="Catalogo" />
+          <NavigationProperty Name="Catalogo11" Relationship="SIHModel.FK_Catalogo_mCatalogo1" FromRole="mCatalogo" ToRole="Catalogo" />
         </EntityType>
         <EntityType Name="mCita">
           <Key>
@@ -559,6 +584,7 @@
           <NavigationProperty Name="mPersona" Relationship="Self.FK_mCita_mPersona" FromRole="mCita" ToRole="mPersona" />
           <NavigationProperty Name="mPersona1" Relationship="Self.FK_mCita_mPersona1" FromRole="mCita" ToRole="mPersona" />
           <NavigationProperty Name="mTratamiento" Relationship="Self.FK_mTratamiento_mCita" FromRole="mCita" ToRole="mTratamiento" />
+          <NavigationProperty Name="mAtencion" Relationship="SIHModel.FK_mAtencion_mCita1" FromRole="mCita" ToRole="mAtencion" />
         </EntityType>
         <EntityType Name="mParametros">
           <Key>
@@ -989,7 +1015,51 @@
             <End Role="mPersona" EntitySet="mPersona" />
             <End Role="rRol_Persona" EntitySet="rRol_Persona" />
           </AssociationSet>
+          <EntitySet Name="mAtencion" EntityType="SIHModel.mAtencion" />
+          <AssociationSet Name="FK_Catalogo_mCatalogo1" Association="SIHModel.FK_Catalogo_mCatalogo1">
+            <End Role="mCatalogo" EntitySet="mCatalogo" />
+            <End Role="Catalogo" EntitySet="Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAtencion_mCita1" Association="SIHModel.FK_mAtencion_mCita1">
+            <End Role="mCita" EntitySet="mCita" />
+            <End Role="mAtencion" EntitySet="mAtencion" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="mAtencion">
+          <Key>
+            <PropertyRef Name="atencion_id" />
+          </Key>
+          <Property Name="atencion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cita_id" Type="Int32" Nullable="false" />
+          <Property Name="diagnostico" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="examenes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="receta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="mCita" Relationship="SIHModel.FK_mAtencion_mCita1" FromRole="mAtencion" ToRole="mCita" />
+        </EntityType>
+        <Association Name="FK_Catalogo_mCatalogo1">
+          <End Type="SIHModel.mCatalogo" Role="mCatalogo" Multiplicity="1" />
+          <End Type="SIHModel.Catalogo" Role="Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mCatalogo">
+              <PropertyRef Name="mcatalogo_id" />
+            </Principal>
+            <Dependent Role="Catalogo">
+              <PropertyRef Name="mcatalogo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAtencion_mCita1">
+          <End Type="SIHModel.mCita" Role="mCita" Multiplicity="1" />
+          <End Type="SIHModel.mAtencion" Role="mAtencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mCita">
+              <PropertyRef Name="cita_id" />
+            </Principal>
+            <Dependent Role="mAtencion">
+              <PropertyRef Name="cita_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1055,9 +1125,6 @@
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="hora" ColumnName="hora" />
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
-                <ScalarProperty Name="diagnostico" ColumnName="diagnostico" />
-                <ScalarProperty Name="examenes" ColumnName="examenes" />
-                <ScalarProperty Name="receta" ColumnName="receta" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1141,6 +1208,17 @@
                 <ScalarProperty Name="registro_id" ColumnName="registro_id" />
                 <ScalarProperty Name="persona_id" ColumnName="persona_id" />
                 <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mAtencion">
+            <EntityTypeMapping TypeName="SIHModel.mAtencion">
+              <MappingFragment StoreEntitySet="mAtencion">
+                <ScalarProperty Name="receta" ColumnName="receta" />
+                <ScalarProperty Name="examenes" ColumnName="examenes" />
+                <ScalarProperty Name="diagnostico" ColumnName="diagnostico" />
+                <ScalarProperty Name="cita_id" ColumnName="cita_id" />
+                <ScalarProperty Name="atencion_id" ColumnName="atencion_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

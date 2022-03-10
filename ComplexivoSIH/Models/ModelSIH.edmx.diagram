@@ -37,6 +37,9 @@
         <AssociationConnector Association="SIHModel.FK_rMedico_Calendario_mPersona" ManuallyRouted="false" />
         <AssociationConnector Association="SIHModel.FK_rMedico_Especialidad_mPersona" ManuallyRouted="false" />
         <AssociationConnector Association="SIHModel.FK_rRolPersona_mPersonas" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SIHModel.mAtencion" Width="1.5" PointX="9.75" PointY="16.625" />
+        <AssociationConnector Association="SIHModel.FK_Catalogo_mCatalogo1" />
+        <AssociationConnector Association="SIHModel.FK_mAtencion_mCita1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
