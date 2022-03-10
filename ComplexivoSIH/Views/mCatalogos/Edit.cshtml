@@ -1,8 +1,8 @@
 ﻿@model ComplexivoSIH.Models.mCatalogo
 
 @{
-    ViewBag.Title = "Sistema Hospitalario En Línea";
-    Layout = ViewBag.layout;
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="caja">
@@ -19,7 +19,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>mCatalogo</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.mcatalogo_id)

@@ -26,6 +26,7 @@ namespace ComplexivoSIH.Models
         }
     
         public virtual DbSet<Catalogo> Catalogo { get; set; }
+        public virtual DbSet<mAtencion> mAtencion { get; set; }
         public virtual DbSet<mAuditoria> mAuditoria { get; set; }
         public virtual DbSet<mCalendario> mCalendario { get; set; }
         public virtual DbSet<mCatalogo> mCatalogo { get; set; }
@@ -37,6 +38,5 @@ namespace ComplexivoSIH.Models
         public virtual DbSet<rMedico_Calendario> rMedico_Calendario { get; set; }
         public virtual DbSet<rMedico_Especialidad> rMedico_Especialidad { get; set; }
         public virtual DbSet<rRol_Persona> rRol_Persona { get; set; }
-        public virtual DbSet<mAtencion> mAtencion { get; set; }
     }
 }

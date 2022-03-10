@@ -17,8 +17,8 @@ namespace ComplexivoSIH.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public mCita()
         {
-            this.mTratamiento = new HashSet<mTratamiento>();
             this.mAtencion = new HashSet<mAtencion>();
+            this.mTratamiento = new HashSet<mTratamiento>();
         }
     
         public int cita_id { get; set; }
@@ -28,17 +28,14 @@ namespace ComplexivoSIH.Models
         public System.DateTime fecha { get; set; }
         public System.DateTime hora { get; set; }
         public string motivo { get; set; }
-        public string diagnostico { get; set; }
-        public string examenes { get; set; }
-        public string receta { get; set; }
         public bool estado { get; set; }
     
         public virtual Catalogo Catalogo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<mAtencion> mAtencion { get; set; }
         public virtual mPersona mPersona { get; set; }
         public virtual mPersona mPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mTratamiento> mTratamiento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<mAtencion> mAtencion { get; set; }
     }
 }

@@ -11,14 +11,27 @@ namespace ComplexivoSIH.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class mParametros
     {
         public int parametro_id { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {1} caracteres", MinimumLength = 5)]
+        [Display(Name = "Servidor SMTP")]
         public string smtpserver { get; set; }
+        [Required]
+        [Display(Name = "Puerto SMTP")]
         public int smtppuerto { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo Electrónico")]
         public string correo_sistema { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Clave de Correo")]
         public string clave_correo { get; set; }
+        [Display(Name = "Estado")]
         public bool estado { get; set; }
     }
 }

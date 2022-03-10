@@ -15,7 +15,7 @@
 
 
 <div>
-    <h4>mCatalogo</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,11 +37,55 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.mcatalogo_id }, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.mcatalogo_id }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Crear Atributo", "CreateCatalogo", new { id = Model.mcatalogo_id }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </p>
-<br />
-<br />
-<br />
+<h4>Atributos de Catálogo</h4>
+@if (Model.Catalogo1.Count() == 0)
+{
+    <h5>No Hay Registros Creados para este Catálogo</h5>
+}
+else
+{
+<table id="Tablas" class="table table-striped table-bordered" style="width:80%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Catalogo1.FirstOrDefault().nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Catalogo1.FirstOrDefault().descripcion)
+            </th>
+            <th>
+                @Html.HiddenFor(model => model.Catalogo1.FirstOrDefault().estado)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model.Catalogo1.OrderBy(g => g.descripcion))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditCatalogo", new { id = item.catalogo_id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Delete", "DeleteCatalogo", new { id = item.catalogo_id }, new { @class = "btn btn-danger", onclick = "return confirm('Seguro de desabilitar registro')" })
+                </td>
+            </tr>
+        }
 
-<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
+</table>
+}
+    <br />
+    <br />
+    <br />
+
+    <div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
