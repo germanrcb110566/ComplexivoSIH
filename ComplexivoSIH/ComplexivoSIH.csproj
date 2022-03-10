@@ -145,6 +145,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\mCalendariosController.cs" />
     <Compile Include="Controllers\mCatalogosController.cs" />
+    <Compile Include="Controllers\mPermisosController.cs" />
+    <Compile Include="Controllers\mPersonasController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Filtros\ClsSesiones.cs" />
     <Compile Include="Global.asax.cs">
@@ -532,6 +534,16 @@
     <Content Include="Views\mCalendarios\Details.cshtml" />
     <Content Include="Views\mCalendarios\Edit.cshtml" />
     <Content Include="Views\mCalendarios\Index.cshtml" />
+    <Content Include="Views\mPermisos\Create.cshtml" />
+    <Content Include="Views\mPermisos\Delete.cshtml" />
+    <Content Include="Views\mPermisos\Details.cshtml" />
+    <Content Include="Views\mPermisos\Edit.cshtml" />
+    <Content Include="Views\mPermisos\Index.cshtml" />
+    <Content Include="Views\mPersonas\Create.cshtml" />
+    <Content Include="Views\mPersonas\Delete.cshtml" />
+    <Content Include="Views\mPersonas\Details.cshtml" />
+    <Content Include="Views\mPersonas\Edit.cshtml" />
+    <Content Include="Views\mPersonas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
