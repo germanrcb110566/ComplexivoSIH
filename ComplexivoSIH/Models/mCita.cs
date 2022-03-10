@@ -9,9 +9,9 @@
 
 namespace ComplexivoSIH.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class mCita
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +25,19 @@ namespace ComplexivoSIH.Models
         public int paciente_id { get; set; }
         public int medico_id { get; set; }
         public int especialidad_id { get; set; }
+
+
+        [Required(ErrorMessage = "{0}  ES REQUERIDO")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha de Cita")]
         public System.DateTime fecha { get; set; }
+
+
+        [Required(ErrorMessage = "{0}  ES REQUERIDO")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Hora de Cita")]
         public System.DateTime hora { get; set; }
         public string motivo { get; set; }
         public bool estado { get; set; }
@@ -33,6 +45,9 @@ namespace ComplexivoSIH.Models
         public virtual Catalogo Catalogo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mAtencion> mAtencion { get; set; }
+        public virtual rRol_Persona rRol_Persona { get; set; }
+        public virtual rMedico_Especialidad rMedico_Especialidad { get; set; }
+
         public virtual mPersona mPersona { get; set; }
         public virtual mPersona mPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

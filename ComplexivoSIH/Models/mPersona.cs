@@ -9,9 +9,9 @@
 
 namespace ComplexivoSIH.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class mPersona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,6 +33,10 @@ namespace ComplexivoSIH.Models
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string celular { get; set; }
+        [Required(ErrorMessage = "{0}  ES REQUERIDO")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha de Cita")]
         public System.DateTime fecha_nacimiento { get; set; }
         public string correo_electronico { get; set; }
         public int genero { get; set; }
