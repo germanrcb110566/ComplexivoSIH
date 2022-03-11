@@ -22,9 +22,13 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Tratamientos ".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
-            var mTratamiento = db.mTratamiento.Include(m => m.Catalogo).Where(x => x.Catalogo.catalogo_id == 10).Include(m => m.mCita);
+            //var mTratamiento = db.mTratamiento.Include(m => m.Catalogo).Where(x => x.Catalogo.catalogo_id == 10).Include(m => m.mCita);
 
-            //var mTratamiento = db.mTratamiento.Include(m => m.Catalogo).Include(m => m.mCita);
+            var mTratamiento = db.mTratamiento.Include(m => m.Catalogo).Include(m => m.mCita);
+
+
+
+
             return View(await mTratamiento.ToListAsync());
         }
 
@@ -54,7 +58,9 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Tratamientos ".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
-            ViewBag.catalogo_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            //ViewBag.catalogo_id = new SelectList(db.Catalogo, "catalogo_id", "nombre");
+            ViewBag.catalogo_id = new SelectList(db.Catalogo.Where(x => x.catalogo_id == 10), "catalogo_id", "nombre");
+
             ViewBag.cita_id = new SelectList(db.mCita, "cita_id", "motivo");
             return View();
         }

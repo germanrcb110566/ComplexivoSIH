@@ -54,9 +54,10 @@
                     @Html.DisplayFor(modelItem => item.mCita.motivo)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.tratamiento_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.tratamiento_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.tratamiento_id })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.tratamiento_id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.tratamiento_id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.tratamiento_id }, new { @class = "btn btn-danger" })
+
                 </td>
             </tr>
         }

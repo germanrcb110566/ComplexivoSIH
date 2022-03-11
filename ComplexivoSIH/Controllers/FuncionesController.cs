@@ -133,6 +133,26 @@ namespace ComplexivoSIH.Controllers
             return Rol;
         }
 
+        public static object Citas_Pendientes()
+        {
+            string SentenciaSQL = "Select * from mCita where cita_id not in (select cita_id from mAtencion)";
+            
+            try
+            {
+                using (var conexion = new SIHEntities())
+                {
+                    var Citas = conexion.Database.SqlQuery<string>(SentenciaSQL);
+                    return Citas;
+                }
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = "0020" + ex.Message;
+            }
+            
+            return "";
+        }
+
         public static string InsertarLog(int Usuario_Id,
                                   int Rol_Id,
                                   int Modulo_Id,

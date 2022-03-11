@@ -22,6 +22,13 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
+
+
+            //var mCita = FuncionesController.Citas_Pendientes();
+            //Select * from mCita where cita_id not in (select cita_id from mAtencion)
+
+
+
             var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
             ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
             if (id == null)
