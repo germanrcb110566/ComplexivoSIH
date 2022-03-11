@@ -72,7 +72,6 @@
           <Property Name="hora" Type="datetime" Nullable="false" />
           <Property Name="motivo" Type="text" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
-          <Property Name="calificacion" Type="int" />
         </EntityType>
         <EntityType Name="mParametros">
           <Key>
@@ -691,7 +690,6 @@
           <NavigationProperty Name="mPersona" Relationship="SIHModel.FK_mCita_mPersona" FromRole="mCita" ToRole="mPersona" />
           <NavigationProperty Name="mPersona1" Relationship="SIHModel.FK_mCita_mPersona1" FromRole="mCita" ToRole="mPersona" />
           <NavigationProperty Name="mTratamiento" Relationship="SIHModel.FK_mTratamiento_mCita" FromRole="mCita" ToRole="mTratamiento" />
-          <Property Name="calificacion" Type="Int32" />
         </EntityType>
         <EntityType Name="mParametros">
           <Key>
@@ -1110,7 +1108,6 @@
           <EntitySetMapping Name="mCita">
             <EntityTypeMapping TypeName="SIHModel.mCita">
               <MappingFragment StoreEntitySet="mCita">
-                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="hora" ColumnName="hora" />

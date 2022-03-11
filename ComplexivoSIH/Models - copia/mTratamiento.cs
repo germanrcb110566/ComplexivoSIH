@@ -22,6 +22,6 @@ namespace ComplexivoSIH.Models
     
         public virtual Catalogo Catalogo { get; set; }
         public virtual mCita mCita { get; set; }
-        public virtual mPersona mPersona { get; set; }
+        public virtual mPersona MPersona { get; set; }
     }
 }

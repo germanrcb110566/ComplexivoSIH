@@ -12,16 +12,15 @@ namespace ComplexivoSIH.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mTratamiento
+    public partial class mAuditoria
     {
-        public int tratamiento_id { get; set; }
-        public int cita_id { get; set; }
-        public int catalogo_id { get; set; }
-        public int cantidad { get; set; }
-        public string prescripcion { get; set; }
+        public int auditoria_id { get; set; }
+        public System.DateTime fecha { get; set; }
+        public int usuario_id { get; set; }
+        public int rol_id { get; set; }
+        public int modulo_id { get; set; }
+        public string sentencia { get; set; }
     
-        public virtual Catalogo Catalogo { get; set; }
-        public virtual mCita mCita { get; set; }
         public virtual mPersona mPersona { get; set; }
     }
 }

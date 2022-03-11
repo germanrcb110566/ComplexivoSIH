@@ -9,7 +9,6 @@
 
 namespace ComplexivoSIH.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -27,6 +26,7 @@ namespace ComplexivoSIH.Models
         public int medico_id { get; set; }
         public int especialidad_id { get; set; }
 
+
         [Required(ErrorMessage = "{0}  ES REQUERIDO")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -41,11 +41,14 @@ namespace ComplexivoSIH.Models
         public System.DateTime hora { get; set; }
         public string motivo { get; set; }
         public bool estado { get; set; }
-        public Nullable<int> calificacion { get; set; }
-    
+        public int calificacion { get; set; }
+
         public virtual Catalogo Catalogo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mAtencion> mAtencion { get; set; }
+        public virtual rRol_Persona rRol_Persona { get; set; }
+        public virtual rMedico_Especialidad rMedico_Especialidad { get; set; }
+
         public virtual mPersona mPersona { get; set; }
         public virtual mPersona mPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

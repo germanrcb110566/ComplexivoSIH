@@ -22,15 +22,23 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
-
+            
+            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+            if (Session["Rol"].ToString() == "PACIENTE")
+            {
+                 int id_persona= Convert.ToInt32(Session["Id_mPersona"].ToString()) ;
+                 mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Where(x =>x.paciente_id == id_persona).Include(m => m.mPersona1);
+                return View(await mCita.ToListAsync());
+            }
 
             //var mCita = FuncionesController.Citas_Pendientes();
             //Select * from mCita where cita_id not in (select cita_id from mAtencion)
 
 
 
-            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
-            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+            //var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+            
             if (id == null)
             {
                 mCita = db.mCita.Where(d => d.estado == true).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
@@ -85,10 +93,28 @@ namespace ComplexivoSIH.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             mCita mCita = await db.mCita.FindAsync(id);
+            ViewBag.calificacion = new SelectList(db.Catalogo.Where(r => r.mcatalogo_id == 1010), "catalogo_id", "descripcion", mCita.calificacion);
             if (mCita == null)
             {
                 return HttpNotFound();
             }
+            return View(mCita);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Details([Bind(Include = "cita_id,paciente_id,medico_id,especialidad_id,fecha,hora,motivo,estado,calificacion")] mCita mCita)
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+            if (ModelState.IsValid)
+            {
+                db.Entry(mCita).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            
             return View(mCita);
         }
 

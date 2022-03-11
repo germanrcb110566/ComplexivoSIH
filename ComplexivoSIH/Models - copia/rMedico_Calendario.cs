@@ -12,16 +12,13 @@ namespace ComplexivoSIH.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mTratamiento
+    public partial class rMedico_Calendario
     {
-        public int tratamiento_id { get; set; }
-        public int cita_id { get; set; }
-        public int catalogo_id { get; set; }
-        public int cantidad { get; set; }
-        public string prescripcion { get; set; }
+        public int registro_id { get; set; }
+        public int medico_id { get; set; }
+        public int calendario_id { get; set; }
     
-        public virtual Catalogo Catalogo { get; set; }
-        public virtual mCita mCita { get; set; }
+        public virtual mCalendario mCalendario { get; set; }
         public virtual mPersona mPersona { get; set; }
     }
 }
