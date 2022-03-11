@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ComplexivoSIH.Models.mCita>
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ContactPDF</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+    <style>
+        /* SOLUCIONA PROBLEMA DE SOLAPAMIENTO EN TABLAS <table /> */
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-row-group
+        }
+
+        tr {
+            page-break-inside: avoid
+        }
+    </style>
+
+</head>
+<body style=" padding: 0px; margin: 0px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <img src="~/Imagenes/logo-hospital.png" />
+        </div>
+        <div class="col-xs-8 text-right">
+            <h2>Reporte Detallado de Calificaciones</h2>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="container">
+        <table id="Tablas">
+            <thead>
+                <tr>
+                    <th>
+                        <pre>Id     </pre>
+                    </th>
+                    <th>
+                        <pre>Apellidos        </pre>
+                    </th>
+                    <th>
+                        <pre>Nombres           </pre>
+                    </th>
+                    <th>
+                        <pre>Id Paciente        </pre>
+                    </th>
+                    <th>
+                        <pre>fecha       </pre>
+                    </th>
+                    <th>
+                        <pre> Calificación   </pre>
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mPersona1.persona_id)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => item.mPersona1.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mPersona1.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mPersona.persona_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.calificacion)
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+   
+</body>
+
+</html>

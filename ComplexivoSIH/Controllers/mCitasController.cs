@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ComplexivoSIH.Models;
+using Rotativa;
 
 namespace ComplexivoSIH.Controllers
 {
@@ -65,6 +66,108 @@ namespace ComplexivoSIH.Controllers
             return View(await mCita.ToListAsync());
         }
 
+        public async Task<ActionResult> ImpDetallado(int? id)
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+
+            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1).Include(m =>m.Catalogo);
+            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+
+
+            if (id == null)
+            {
+                mCita = db.mCita.Where(d => d.estado == true).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+                return View(await mCita.ToListAsync());
+            }
+            else
+            {
+                if (id == 2)
+                {
+                    mCita = db.mCita.Where(d => d.estado == false).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+                    return View(await mCita.ToListAsync());
+
+                }
+                else
+                {
+                    if (id == 1)
+                    {
+                        mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+                        return View(await mCita.ToListAsync());
+                    }
+                }
+            }
+            mCita = db.mCita.Where(d => d.estado == true).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+            return View(await mCita.ToListAsync());
+        }
+        public async Task<ActionResult> RepDetallado(int? id)
+        {
+            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1).Include(m => m.Catalogo);
+            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+
+
+            // Define la URL de la Cabecera 
+            string _headerUrl = Url.Action("HeaderPDF", "Home", null, "http");
+            // Define la URL del Pie de página
+            string _footerUrl = Url.Action("FooterPDF", "Home", null, "http");
+
+            return new ViewAsPdf("RepDetallado", await mCita.ToListAsync())
+            {
+                // Establece la Cabecera y el Pie de página
+                //CustomSwitches = "--header-html " + _headerUrl + " --header-spacing 0 " +
+                //                 "--footer-html " + _footerUrl + " --footer-spacing 0"
+                //,
+                PageSize = Rotativa.Options.Size.A4
+                //,FileName = "CustomersLista.pdf" // SI QUEREMOS QUE EL ARCHIVO SE DESCARGUE DIRECTAMENTE
+                ,
+                PageMargins = new Rotativa.Options.Margins(40, 10, 10, 10)
+            };
+        }
+
+
+        public async Task<ActionResult> ImpResumen(int? id)
+        {
+            ViewBag.alerta = "info";
+            ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
+            ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
+            ViewBag.layout = Session["Layout"];
+
+            //var mCita = db.mCita.Where(d => d.estado == true).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1).Count();
+            //ctx.Cases.Count(a => a.Role == "admin")
+            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1).Include(m => m.Catalogo);
+            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+
+
+            
+            mCita = db.mCita.Where(d => d.estado == true).Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1);
+            return View(await mCita.ToListAsync());
+        }
+        public async Task<ActionResult> RepResumen(int? id)
+        {
+            var mCita = db.mCita.Include(m => m.Catalogo).Include(m => m.mPersona).Include(m => m.mPersona1).Include(m => m.Catalogo);
+            ViewBag.medico_id = new SelectList(db.rRol_Persona.Include("mPersona").Where(x => x.rol_id == 10).Select(x => x.mPersona), "persona_id", "nombres");
+
+
+            // Define la URL de la Cabecera 
+            string _headerUrl = Url.Action("HeaderPDF", "Home", null, "http");
+            // Define la URL del Pie de página
+            string _footerUrl = Url.Action("FooterPDF", "Home", null, "http");
+
+            return new ViewAsPdf("RepDetallado", await mCita.ToListAsync())
+            {
+                // Establece la Cabecera y el Pie de página
+                //CustomSwitches = "--header-html " + _headerUrl + " --header-spacing 0 " +
+                //                 "--footer-html " + _footerUrl + " --footer-spacing 0"
+                //,
+                PageSize = Rotativa.Options.Size.A4
+                //,FileName = "CustomersLista.pdf" // SI QUEREMOS QUE EL ARCHIVO SE DESCARGUE DIRECTAMENTE
+                ,
+                PageMargins = new Rotativa.Options.Margins(40, 10, 10, 10)
+            };
+        }
+
         public ActionResult Inactivos()
         {
             ViewBag.alerta = "info";
@@ -108,8 +211,18 @@ namespace ComplexivoSIH.Controllers
             ViewBag.msgmodulo = "Visualizar Citas de Pacientes".ToUpper();
             ViewBag.acceso = "Acceso A:".ToUpper() + Session["Nombres"] + "........ASIGNADO EL ROL:" + Session["Rol"];
             ViewBag.layout = Session["Layout"];
+
+
+            string SentenciaSQL = "Select nombre from Catalogo where catalogo_id =" + mCita.calificacion;
+
+                using (var conexion = new SIHEntities())
+                {
+                var Citas = conexion.Database.SqlQuery<string>(SentenciaSQL);
+                }
+
             if (ModelState.IsValid)
             {
+                
                 db.Entry(mCita).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

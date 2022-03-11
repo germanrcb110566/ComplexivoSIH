@@ -602,6 +602,9 @@
     <Content Include="Views\mTratamientoes\Imprimir.cshtml" />
     <Content Include="Views\Home\HeaderPDF.cshtml" />
     <Content Include="Views\Home\FooterPDF.cshtml" />
+    <Content Include="Views\mCitas\RepDetallado.cshtml" />
+    <Content Include="Views\mCitas\ImpDetallado.cshtml" />
+    <Content Include="Views\mCitas\ImpResumen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

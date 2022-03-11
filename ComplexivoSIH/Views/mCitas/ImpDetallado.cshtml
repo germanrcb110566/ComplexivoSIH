@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ComplexivoSIH.Models.mCita>
+
+@{
+    ViewBag.Title = "Sistema Hospitalario En Línea";
+    Layout = ViewBag.layout;
+}
+
+<div id="caja">
+    <div id="texto-left" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta">- - <b>@ViewBag.msgmodulo</b> - -</div>
+    <div id="texto-rigth" style="color: black; height:50px" class="alert alert-@ViewBag.alerta">@ViewBag.acceso</div>
+</div>
+<br />
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Imprimir", "RepDetallado", new { }, new { @class = "btn btn-info" }) |
+</p>
+<table id="Tablas" class="table table-striped table-bordered" style="width:80%">
+    <thead>
+        <tr>
+            <th>
+                Id&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <th>
+                Apellidos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <th>
+                &nbsp;&nbsp;&nbsp;Nombres&nbsp;&nbsp;
+            </th>
+            <th>
+                Id Paciente&nbsp;&nbsp;
+            </th>
+            <th>
+                fecha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <th>
+                Calificación
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.mPersona1.persona_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.mPersona1.apellidos)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.mPersona1.nombres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.mPersona.persona_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.calificacion)
+    </td>
+
+</tr>
+    }
+
+</table>
+<br />
+<br />
+<br />
+
+<div id="msgerror" style="color: blue; height:50px" class="alert alert-@ViewBag.alerta"><b>@ViewBag.error</b></div>
