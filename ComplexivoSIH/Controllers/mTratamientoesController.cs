@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ComplexivoSIH.Models;
+using Rotativa;
 
 namespace ComplexivoSIH.Controllers
 {
@@ -30,6 +31,28 @@ namespace ComplexivoSIH.Controllers
 
 
             return View(await mTratamiento.ToListAsync());
+        }
+
+        public async Task<ActionResult> Imprimir()
+        {
+            var mTratamiento = db.mTratamiento.Include(m => m.Catalogo).Include(m => m.mCita);
+
+            // Define la URL de la Cabecera 
+            string _headerUrl = Url.Action("HeaderPDF", "Home", null, "http");
+            // Define la URL del Pie de página
+            string _footerUrl = Url.Action("FooterPDF", "Home", null, "http");
+
+            return new ViewAsPdf("Imprimir", await mTratamiento.ToListAsync())
+            {
+                // Establece la Cabecera y el Pie de página
+                //CustomSwitches = "--header-html " + _headerUrl + " --header-spacing 0 " +
+                //                 "--footer-html " + _footerUrl + " --footer-spacing 0"
+                //,
+                PageSize = Rotativa.Options.Size.A4
+                //,FileName = "CustomersLista.pdf" // SI QUEREMOS QUE EL ARCHIVO SE DESCARGUE DIRECTAMENTE
+                ,
+                PageMargins = new Rotativa.Options.Margins(40, 10, 10, 10)
+            };
         }
 
         // GET: mTratamientoes/Details/5

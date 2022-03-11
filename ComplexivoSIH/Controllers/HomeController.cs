@@ -8,6 +8,15 @@ namespace ComplexivoSIH.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult HeaderPDF()
+        {
+            return View("HeaderPDF");
+        }
+
+        public ActionResult FooterPDF()
+        {
+            return View("FooterPDF");
+        }
         public ActionResult Index()
         {
 

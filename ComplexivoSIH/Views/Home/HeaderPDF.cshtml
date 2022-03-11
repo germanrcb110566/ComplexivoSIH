@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RECETA</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <style>
+        /* SOLUCIONA PROBLEMA DE SOLAPAMIENTO EN TABLAS <table /> */
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-row-group
+        }
+
+        tr {
+            page-break-inside: avoid
+        }
+    </style>
+</head>
+<body style=" padding: 0px; margin: 0px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <img src="~/Imagenes/logo-hospital.png" />
+        </div>
+        <div class="col-xs-8 text-right">
+            <h2>Tratamiento</h2>
+        </div>
+    </div>
+</body>
+</html>

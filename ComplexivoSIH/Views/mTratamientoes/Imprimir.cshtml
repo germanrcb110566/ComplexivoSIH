@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ComplexivoSIH.Models.mTratamiento>
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ContactPDF</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+    <style>
+        /* SOLUCIONA PROBLEMA DE SOLAPAMIENTO EN TABLAS <table /> */
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-row-group
+        }
+
+        tr {
+            page-break-inside: avoid
+        }
+    </style>
+
+</head>
+<body style=" padding: 0px; margin: 0px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <img src="~/Imagenes/logo-hospital.png" />
+        </div>
+        <div class="col-xs-8 text-right">
+            <h2>Tratamiento</h2>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="container">
+        <table id="Tablas">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.prescripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Catalogo.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.mCita.motivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MPersona.nombres)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prescripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Catalogo.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mCita.motivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MPersona.nombres)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+    @*<div class="text-center">
+        <strong>
+            Página <span id='page'></span> de
+            <span id='topage'></span>
+        </strong>
+
+        <script>
+            var vars = {};
+            var x = window.location.search.substring(1).split('&');
+            for (var i in x) {
+                var z = x[i].split('=', 2);
+                vars[z[0]] = unescape(z[1]);
+            }
+            document.getElementById('page').innerHTML = vars.page;
+            document.getElementById('topage').innerHTML = vars.topage;
+        </script>
+
+    </div>*@
+</body>
+
+</html>

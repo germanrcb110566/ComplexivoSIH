@@ -23,4 +23,15 @@ textarea {
     max-width: 360px;
 }
 
+/* SOLUCIONA PROBLEMA DE SOLAPAMIENTO EN TABLAS <table /> */
+thead {
+    display: table-header-group
+}
 
+tfoot {
+    display: table-row-group
+}
+
+tr {
+    page-break-inside: avoid
+}
